@@ -13,7 +13,7 @@ def decrypt_json_file():
     root = Tk()
     root.withdraw()
 
-    # Step 1: Select encrypted file
+    # Select encrypted file
     enc_file_path = filedialog.askopenfilename(
         title="Select Encrypted File to Decrypt",
         filetypes=[("Encrypted Files", "*.enc")],
@@ -22,7 +22,7 @@ def decrypt_json_file():
         print("No file selected.")
         return
 
-    # Step 2: Try password up to 3 times
+    # Try password up to 3 times
     decrypted_data = None
     for attempt in range(3):
         password = simpledialog.askstring("Password", f"Enter decryption password (Attempt {attempt+1}/3):", show='*')
@@ -45,7 +45,7 @@ def decrypt_json_file():
         print("Decryption failed: Maximum attempts reached.")
         return
 
-    # Step 3: Choose output save location
+    # Choose output save location
     original_name = os.path.basename(enc_file_path)
     name_without_ext = original_name.replace(".json.enc", "").replace(".enc", "")
     initial_file_name = f"decrypted_{name_without_ext}.json"
@@ -60,7 +60,7 @@ def decrypt_json_file():
         print("No output file selected.")
         return
 
-    # Step 4: Save decrypted JSON
+    # Save decrypted JSON
     try:
         json_data = json.loads(decrypted_data)
         with open(output_path, 'w') as out_file:
