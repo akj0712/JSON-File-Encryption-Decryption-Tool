@@ -4,6 +4,7 @@ import base64
 import hashlib
 from tkinter import Tk, filedialog, simpledialog
 import os
+import stat
 
 def generate_key(password):
     return base64.urlsafe_b64encode(hashlib.sha256(password.encode()).digest())
@@ -51,7 +52,14 @@ def encrypt_json_file():
         with open(output_path, 'wb') as file:
             file.write(encrypted)
 
+        # Make file read-only
+        os.chmod(output_path, stat.S_IREAD)  # On Unix-like systems
+        # On Windows, to ensure it's also read-only at OS level:
+        if os.name == 'nt':
+            os.system(f'attrib +R "{output_path}"')
+
         print("Encrypted and saved to:", output_path)
+        print("File is now read-only.")
     except Exception as e:
         print("Encryption failed:", str(e))
 
