@@ -86,5 +86,3 @@ MIT License. Use this responsibly.
 ## 🙋‍♂️ Author
 
 Made with ❤️ by [Abhinav Kumar Jha](https://github.com/akj0712)
-
----
